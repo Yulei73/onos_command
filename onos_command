@@ -1,0 +1,31 @@
+cd "/home/ylmsi2/.bazel/bin" && curl -fLO https://releases.bazel.build/3.0.0/release/bazel-3.0.0-linux-x86_64 && chmod +x bazel-3.0.0-linux-x86_64
+
+source tools/dev/bash_profile
+bazel run onos-local -- clean debug
+onos localhost
+
+bazel build onos(do not use)
+
+在Mobilityfirst目录执行（IPv4就是ipv4）
+bazel build //apps/mobolity-first/mobilityfirst:all（此为示例）
+在pipeconf目录执行
+bazel build //apps/mobolity-first/pipeconf:all（此为示例）
+bazel build //apps/wxyNDNApp/ndnpipeconf:all
+生成的oar位置：
+.cache/bazel/_bazel_user/c42cbfd2cdf6b9981f69ddf5581a02a8/execroot/org_onosproject_onos/bazel-out/k8-fastbuild/bin/apps/mobolity-first
+
+生成的oar加载到onos
+onos启动：(时间很长）
+bazel run onos-local -- clean debug
+
+sudo -E mn --mac --custom $BMV2_MN_PY --switch onosbmv2,pipeconf=nextworking-ipv4-pipeconf --topo mytopo --controller remote,ip=127.0.0.1
+
+sudo -E mn --mac --custom $BMV2_MN_PY --switch onosbmv2,pipeconf=wxyNDNApp-ndnpipeconf --topo mytopo --controller remote,ip=127.0.0.1
+
+sudo simple_switch_grpc -i 1@ens17 --device-id 1 --log-console --thrift-port 9090  --no-p4 -- --grpc-server-addr 0.0.0.0:50051 --cpu-port 255
+
+sudo simple_switch_grpc -i 1@ens17 --device-id 1 --log-console --thrift-port 9090  --no-p4 -- --grpc-server-addr 0.0.0.0:50051 --cpu-port 255
+
+onos-netcfg localhost /home/cuia/Documents/mf.json
+
+
